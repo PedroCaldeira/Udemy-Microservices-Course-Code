@@ -24,13 +24,13 @@ app.post("/posts", (req, res) => {
   axios.post("http://localhost:4005/events", {
     type: "PostCreated",
     data: posts[id],
-  });
+  }).catch((err) => console.log(err));
   res.status(201).send(posts[id]);
 });
 
-app.post("/events",(req,res) =>{
-    console.log("Received event",req.body.type)
-    res.send({})
+app.post("/events", (req, res) => {
+  console.log("Received event", req.body.type)
+  res.send({})
 })
 
 app.listen(4000, () => {
