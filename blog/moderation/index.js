@@ -6,7 +6,8 @@ app.use(express.json());
 
 const handleEvent = async (type, data) => {
     if (type === "CommentCreated") {
-        await axios.post("http://localhost:4005/events", {
+        // await axios.post("http://localhost:4005/events", {
+        await axios.post("http://event-bus-srv:4005/events", {
             type: "CommentModerated",
             data: {
                 ...data,
@@ -25,7 +26,8 @@ app.post("/events", (req, res) => {
 
 app.listen(4003, async () => {
     console.log("Listening on 4003");
-    const res = await axios.get("http://localhost:4005/events").catch(err => console.log(err.message))
+    // const res = await axios.get("http://localhost:4005/events").catch(err => console.log(err.message))
+    const res = await axios.get("http://event-bus-srv:4005/events").catch(err => console.log(err.message))
     for (let event of res.data) {
         console.log("Processing Event: ", event.type)
         handleEvent(event.type, event.data)

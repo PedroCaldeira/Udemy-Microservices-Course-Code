@@ -21,7 +21,8 @@ app.post("/posts", (req, res) => {
     id,
     title,
   };
-  axios.post("http://localhost:4005/events", {
+  // axios.post("http://localhost:4005/events", {
+  axios.post("http://event-bus-srv:4005/events", {
     type: "PostCreated",
     data: posts[id],
   }).catch((err) => console.log(err));
@@ -34,5 +35,6 @@ app.post("/events", (req, res) => {
 })
 
 app.listen(4000, () => {
+  console.log('v22')
   console.log("Listening on 4000");
 });
